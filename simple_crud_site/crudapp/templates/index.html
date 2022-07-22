@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>crud home</title>
+</head>
+<body>
+<h1>post list>
+<ul>
+{%if posts %}
+{%for post in posts %}
+<li><a href="/read?title={{post}}">{{post}}</a>
+{%endfor%}
+{%else%}
+<div>empty</div>
+
+</ul>
+{%endif%}
+</body>
+</html>
