@@ -7,9 +7,12 @@
     <h1>create</h1>
 <form action="" method="post">
 {%csrf_token%}
-    <input type="text" name="author" title="your nick name">
+    <label for="author">your nickname</label>
+    <input type="text" name="author" title="your nickname">
+    <label for="title">title</label>
     <input type="text" name="title" title="title">
-<textarea title="content" name="content"></textarea>
+    <label for="content">content</label>
+    <textarea title="content" name="content"></textarea>
 <input type="submit" value="create">
 </form>
 </body>
