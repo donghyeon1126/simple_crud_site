@@ -8,7 +8,8 @@
     <h1>{{article.title}}</h1>
 <div>
     created by {{article.author}}
-    {{article.date}}
+    {{article.date}}<br>
+<a href="http://{{host}}/update/{{article.id}}">modify</a>
    
 </div>
 <h2>content</h2>
@@ -17,5 +18,18 @@
 {{article.content}}
 </pre>
 </div>
+<h2>delete this post>
+{%if errormsg %}
+<div>{{errormsg}}</div>
+{%endif%}
+<br>
+<form action="http://{{host}}/delete/" method="post">
+{%csrf_token%}
+<input type="hidden" name="id" value="{{article.id}}">
+<label for="author">your nickname</label>
+<input type="text" title="your nickname" name="author":
+<label for="author_password">password</label>
+<input type="password" name="author_password" title="password">
+<input type="submit" value="delete this post">
 </body>
     </html>
