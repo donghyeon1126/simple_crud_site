@@ -5,19 +5,22 @@
     </head>
 <body>
     <a href="/">home</a>
-<h1>edit this article</h1>
-<br>
-{%if errormsg %}
-<div>{{errormsg}}
-</div>
-{%endif%}
-<form action="" method="post">
-{%csrf_token%}
-<input type="text" name="author" title="your nickname">
-<input type="password" name="author_password" title="password">
-<input type="text" name="title" title="title" value="{{article.title}}">
-<textarea name="content" title="content">{{article.content}}</textarea>
-<input type="submit" value="update">
-</form>
+    <h1>edit this article</h1>
+    <br>
+    {%if errormsg %}
+        <div>{{errormsg}} </div>
+    {%endif%}
+    <form action="" method="post">
+        {%csrf_token%}
+        <label for="author">your nickname</label>
+        <input type="text" name="author" title="your nickname">
+        <label for="author_password">password</label>
+        <input type="password" name="author_password" title="password">
+        <label for="title">title</label>
+        <input type="text" name="title" title="title" value="{{article.title}}">
+        <label for="content">content</label>
+        <textarea name="content" title="content">{{article.content}}</textarea>
+        <input type="submit" value="update">
+    </form>
 </body>
     </html>
