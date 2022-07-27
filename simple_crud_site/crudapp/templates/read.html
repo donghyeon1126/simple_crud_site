@@ -18,6 +18,25 @@
 {{article.content}}
 </pre>
 </div>
+<h2>comments</h2>
+{%if comments %}
+{%for comment in comments %}
+<ul>
+{{comment.author}} commented at {{comment.comment_date}}
+<pre>
+{{comment.content}}
+</pre>
+</ul>
+{%endfor%}
+{%endif%}
+<br>
+<form action="http://{{host}}/delcmt/" method="post">
+<label for="author">your nickname</label>
+<input type="text" id="author" title="your nickname">
+<label for="author_password">password</label>
+<input type="password" id="author_password" title="password">
+<input type="submit" value="create comment">
+</form>
 <h2>delete this post>
 {%if errormsg %}
 <div>{{errormsg}}</div>
