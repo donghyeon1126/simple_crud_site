@@ -23,5 +23,6 @@ urlpatterns = [
     path('read/', views.read),
     path('delete/', views.delete),
     path('update/<int:id>/', views.update),
+    path('createcmt/', views.create_comment),
 ]
      
