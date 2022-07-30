@@ -10,6 +10,18 @@
     created by {{article.author}}
     {{article.date}}<br>
 <a href="http://{{host}}/update/{{article.id}}">modify</a>
+<details>
+<summary>delete this post</summary>
+
+<form action="http://{{host}}/delete/" method="post">
+{%csrf_token%}
+<input type="hidden" name="id" value="{{article.id}}">
+<label for="author">your nickname</label>
+<input type="text" title="your nickname" name="author":
+<label for="author_password">password</label>
+<input type="password" name="author_password" title="password">
+<input type="submit" value="delete this post">
+</details>
    
 </div>
 <h2>content</h2>
@@ -41,18 +53,10 @@
 <textarea name="comment_content" title="comment content"></textarea>
 <input type="submit" value="create comment">
 </form>
-<h2>delete this post>
+
 {%if errormsg %}
 <div>{{errormsg}}</div>
 {%endif%}
 <br>
-<form action="http://{{host}}/delete/" method="post">
-{%csrf_token%}
-<input type="hidden" name="id" value="{{article.id}}">
-<label for="author">your nickname</label>
-<input type="text" title="your nickname" name="author":
-<label for="author_password">password</label>
-<input type="password" name="author_password" title="password">
-<input type="submit" value="delete this post">
 </body>
     </html>
