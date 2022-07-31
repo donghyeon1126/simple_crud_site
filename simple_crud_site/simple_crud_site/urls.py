@@ -19,9 +19,9 @@ from crudapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path('create/', views.create),
-    path('read/', views.read),
-    path('delete/', views.delete),
+    path('create/', views.create, name='createview'),
+    path('read/', views.read, name='readview'),
+    path('delete/', views.delete, name='deleteview'),
     path('update/<int:id>/', views.update),
     path('createcmt/', views.create_comment),
 ]

@@ -9,11 +9,11 @@
 <div>
     created by {{article.author}}
     {{article.date}}<br>
-<a href="http://{{host}}/update/{{article.id}}">modify</a>
+<a href="{%url 'updateview' %}{{article.id}}">modify</a>
 <details>
 <summary>delete this post</summary>
 
-<form action="http://{{host}}/delete/" method="post">
+<form action="{{%url 'deleteview' %}" method="post">
 {%csrf_token%}
 <input type="hidden" name="id" value="{{article.id}}">
 <label for="author">your nickname</label>
