@@ -32,7 +32,7 @@ def read(request):
         return redirect('/')
     comments = article.comments_set.all()
 
-    return render(request, 'read.html', context={'article':article, 'comments':comments, 'host':request.get_host()})
+    return render(request, 'read.html', context={'article':article, 'comments':comments})
 
 def delete(request):
     if request.method == 'GET':

@@ -9,7 +9,7 @@
 <div>
     created by {{article.author}}
     {{article.date}}<br>
-<a href="{%url 'updateview' %}{{article.id}}">modify</a>
+<a href="{%url 'updateview' article.id%}">modify</a>
 <details>
 <summary>delete this post</summary>
 

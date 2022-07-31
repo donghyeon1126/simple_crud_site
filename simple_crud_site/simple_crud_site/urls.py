@@ -22,7 +22,7 @@ urlpatterns = [
     path('create/', views.create, name='createview'),
     path('read/', views.read, name='readview'),
     path('delete/', views.delete, name='deleteview'),
-    path('update/<int:id>/', views.update),
+    path('update/<int:id>/', views.update, name='updateview'),
     path('createcmt/', views.create_comment),
 ]
      
