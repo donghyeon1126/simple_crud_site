@@ -4,6 +4,11 @@
         <title>reading {{article.title}}</title>
     </head>
 <body>
+{%if messages%}
+{%for message in messages%}
+<script> alert("{{message.message}}"); </script>
+{%endfor%}
+{%endif%}
 <a href="/">go to home</a>
     <h1>{{article.title}}</h1>
 <div>

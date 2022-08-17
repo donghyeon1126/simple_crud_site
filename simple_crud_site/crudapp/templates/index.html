@@ -4,6 +4,11 @@
 <title>crud home</title>
 </head>
 <body>
+{%if messages%}
+{%for message in messages%}
+<script> alert("{{message.message}}"); </script>
+{%endfor%}
+{%endif%}
 <h1>post list>
 <ul>
 {%if posts %}

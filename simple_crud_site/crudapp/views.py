@@ -1,4 +1,5 @@
 import hashlib
+from django.contrib import messages
 from django.shortcuts import render,redirect,get_object_or_404
 from django.utils import timezone
 from crudapp.models import Posts, Comments
@@ -22,6 +23,7 @@ def create(request):
         author_password = hashlib.sha256(author_password.encode()).hexdigest()
         p = Posts(title=title, content=content, date=timezone.now(), author=author, author_password=author_password)
         p.save()
+        messages.success(request, 'post was uploaded')
         return redirect('/')
 
 def read(request,id):
@@ -40,10 +42,9 @@ def delete(request):
     if author_password == article.author_password and author == article.author:
         article.delete()
         article.save()
-        return redirect('/')
     else:
-        context = {'article':article, 'errormsg':'The password or nickname does wrong'}
-        return render(request, 'index.html', context=context)
+        messages.error(request, 'Incorrect author information')
+        return redirect('/')
 
 def update(request,id):
     if request.method == 'GET':
@@ -60,10 +61,10 @@ def update(request,id):
             article.title = title
             article.content = content
             article.save()
-            return redirect('/read/'+str(id))
         else:
-            context = {'article':article, 'errormsg':'the password or nickname does wrong'}
-            return render(request, 'update.html', context=context)
+            messages.error(request, 'Incorrect author information')
+        return redirect('/read/'+str(id))
+
 
 def create_comment(request):
     author = request.POST.get("author")
