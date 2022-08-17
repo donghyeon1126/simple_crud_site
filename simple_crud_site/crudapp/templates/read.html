@@ -13,7 +13,7 @@
 <details>
 <summary>delete this post</summary>
 
-<form action="{{%url 'deleteview' %}" method="post">
+<form action="{%url 'deleteview'%}" method="post">
 {%csrf_token%}
 <input type="hidden" name="id" value="{{article.id}}">
 <label for="author">your nickname</label>

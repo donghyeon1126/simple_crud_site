@@ -1,5 +1,5 @@
 import hashlib
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.utils import timezone
 from crudapp.models import Posts, Comments
 
@@ -24,34 +24,30 @@ def create(request):
         p.save()
         return redirect('/')
 
-def read(request):
-    try:
-        id = int(request.GET.get('id'))
-        article = Posts.objects.get(id=id)
-    except:
-        return redirect('/')
+def read(request,id):
+    article = get_object_or_404(Posts, pk=id)
     comments = article.comments_set.all()
 
     return render(request, 'read.html', context={'article':article, 'comments':comments})
 
 def delete(request):
-    if request.method == 'GET':
-        article = Posts.objects.get(id=id)
-        return render(request, 'update.html', context={'article':article})
+    if request.method != 'POST':
+        return redirect('/')
     author = request.POST.get('author')
     author_password = hashlib.sha256(request.POST.get('author_password').encode()).hexdigest()
     id = int(request.POST.get('id'))
-    article = Posts.objects.filter(id=id)[0]
+    article = Posts.objects.get(id=id)
     if author_password == article.author_password and author == article.author:
         article.delete()
+        article.save()
         return redirect('/')
     else:
         context = {'article':article, 'errormsg':'The password or nickname does wrong'}
-        return render(request, 'read.html', context=context)
+        return render(request, 'index.html', context=context)
 
 def update(request,id):
     if request.method == 'GET':
-        article = Posts.objects.get(id=id)
+        article = get_object_or_404(Posts, pk=id)
         return render(request, 'update.html', context={'article':article})
 
     if request.method == 'POST':
@@ -59,12 +55,12 @@ def update(request,id):
         author_password = hashlib.sha256(request.POST.get('author_password').encode()).hexdigest()
         title = request.POST.get('title')
         content = request.POST.get('content')
-        article = Posts.objects.get(id=id)
+        article = get_object_or_404(Posts, pk=id)
         if author == article.author and author_password == article.author_password:
             article.title = title
             article.content = content
             article.save()
-            return redirect('/read?id='+str(id))
+            return redirect('/read/'+str(id))
         else:
             context = {'article':article, 'errormsg':'the password or nickname does wrong'}
             return render(request, 'update.html', context=context)
@@ -74,7 +70,7 @@ def create_comment(request):
     author_password = hashlib.sha256(request.POST.get("author_password").encode()).hexdigest()
     comment_content = request.POST.get("comment_content")
     id = int(request.POST.get("id"))
-    p = Posts.objects.get(id=id)
+    p = get_object_or_404(Posts, pk=id)
     comment = Comments(post=p, comment_date=timezone.now(), author=author, author_password=author_password, comment_content=comment_content)
     comment.save()
-    return redirect('/read/?id='+str(id))
+    return redirect('/read/'+str(id))

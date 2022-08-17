@@ -14,15 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 '''
 from django.contrib import admin
-from django.urls import path
-from crudapp import views
+from django.urls import path,include
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.index),
-    path('create/', views.create, name='createview'),
-    path('read/', views.read, name='readview'),
-    path('delete/', views.delete, name='deleteview'),
-    path('update/<int:id>/', views.update, name='updateview'),
-    path('createcmt/', views.create_comment),
+    path('', include('crudapp.urls')),
 ]
      

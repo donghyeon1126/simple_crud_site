@@ -8,13 +8,13 @@
 <ul>
 {%if posts %}
 {%for post in posts %}
-<li><a href="/read?id={{post.id}}">{{post.title}}</a>
+<li><a href="{%url 'readview' post.id%}">{{post.title}}</a>
 {%endfor%}
 {%else%}
 <div>empty</div>
 
 {%endif%}
 </ul>
-<a href="/create">write post</a>
+<a href="{%url 'createview'%}">write post</a>
 </body>
 </html>
